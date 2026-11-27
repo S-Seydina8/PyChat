@@ -23,3 +23,16 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
     # il target all'interno della Threading e' una callback, cioe non serve inserire le () dopo il richiamo della funzione
     threading.Thread(target=riceviMessaggi, args=(s,), daemon=true).start()
+
+    # invio messaggio
+
+    while True:
+        try:
+            messaggio = input()
+            if messaggio.lower() == "exit":
+                print("Disconnessione...")
+                s.close()
+        except KeyboardInterrupt:
+            # CTRL + C
+            print("Chiusura forzata...")
+            s.close()
